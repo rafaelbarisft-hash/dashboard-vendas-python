@@ -1,35 +1,51 @@
-import mysql.connector
 import pandas as pd
+import streamlit as st
+import matplotlib.pyplot as plt
 
-conexao = mysql.connector.connect(
-    host='localhost',
-    user='root',
-    password='',
-    database='dashboard_vendas'
-)
-
-print("Conectado com sucesso!")
-
+# Ler arquivo CSV
 df = pd.read_csv("vendas.csv")
 
-print(df)
+# Título
+st.title("Dashboard de Vendas")
+
+# Mostrar tabela
+st.subheader("Tabela de Vendas")
+st.dataframe(df)
 
 # FATURAMENTO TOTAL
 faturamento = df['valor'].sum()
 
-print("\nFaturamento Total:")
-print(f"R$ {faturamento}")
-
-# QUANTIDADE TOTAL DE PRODUTOS
+# QUANTIDADE TOTAL
 quantidade = df['quantidade'].sum()
 
-print("\nQuantidade Vendida:")
-print(quantidade)
+# Métricas
+st.metric("Faturamento Total", f"R$ {faturamento}")
+st.metric("Quantidade Vendida", quantidade)
 
-# PRODUTO MAIS CARO
-mais_caro = df.loc[df['valor'].idxmax()]
+# Gráfico de barras
+st.subheader("Vendas por Produto")
 
-print("\nProduto Mais Caro:")
-print(mais_caro['produto'])
+grafico_produtos = df.groupby('produto')['valor'].sum()
 
-conexao.close()
+fig, ax = plt.subplots()
+
+ax.bar(grafico_produtos.index, grafico_produtos.values)
+
+plt.xticks(rotation=45)
+
+st.pyplot(fig)
+
+# Gráfico pizza
+st.subheader("Vendas por Categoria")
+
+grafico_categoria = df.groupby('categoria')['valor'].sum()
+
+fig2, ax2 = plt.subplots()
+
+ax2.pie(
+    grafico_categoria.values,
+    labels=grafico_categoria.index,
+    autopct='%1.1f%%'
+)
+
+st.pyplot(fig2)
