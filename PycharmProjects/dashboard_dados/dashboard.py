@@ -3,7 +3,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 
 # leitura dos dados CSV
-df = pd.read_csv("PycharmProjects/dashboard_dados/vendas.csv")
+df = pd.read_csv("vendas.csv")
 
 # título
 st.title("Dashboard de Vendas")
