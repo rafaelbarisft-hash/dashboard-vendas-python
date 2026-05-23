@@ -1,0 +1,6 @@
+produto,categoria,valor,quantidade,data_venda,cidade
+Notebook,Eletrônicos,3500,2,2026-01-10,São Paulo
+Mouse Gamer,Periféricos,150,5,2026-01-12,Londrina
+Teclado Mecânico,Periféricos,450,3,2026-01-15,Curitiba
+Monitor,Eletrônicos,1200,2,2026-01-18,Rio de Janeiro
+Headset,Áudio,300,4,2026-01-20,Campinas

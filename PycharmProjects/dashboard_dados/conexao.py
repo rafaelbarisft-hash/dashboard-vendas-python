@@ -10,9 +10,7 @@ conexao = mysql.connector.connect(
 
 print("Conectado com sucesso!")
 
-query = "SELECT * FROM vendas"
-
-df = pd.read_sql(query, conexao)
+df = pd.read_csv("vendas.csv")
 
 print(df)
 
