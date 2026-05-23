@@ -1,22 +1,16 @@
-import mysql.connector
 import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
 
-# conexão
-conexao = mysql.connector.connect(
-    host='localhost',
-    user='root',
-    password='',
-    database='dashboard_vendas'
-)
-
-# leitura dos dados
-query = "SELECT * FROM vendas"
-df = pd.read_sql(query, conexao)
+# leitura dos dados CSV
+df = pd.read_csv("PycharmProjects/dashboard_dados/vendas.csv")
 
 # título
 st.title("Dashboard de Vendas")
+
+# mostrar tabela
+st.subheader("Tabela de Vendas")
+st.dataframe(df)
 
 # métricas
 faturamento = df['valor'].sum()
@@ -52,5 +46,3 @@ ax2.pie(
 )
 
 st.pyplot(fig2)
-
-conexao.close()
